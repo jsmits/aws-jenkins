@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
       region:   eu-west-1
-      ami:      ami-149f7863
+      ami:      ami-07cb2670  # Ubuntu 12.04.3 LTS 64-bit ebs eu-west-1
       set_dns:  False
       instance: t1.micro
   connection: local
@@ -11,7 +11,7 @@
   tasks:
     - name: Launch instance
       ec2:
-        keypair=shared
+        keypair=deployer
         instance_type={{ instance }}
         image={{ ami }}
         region={{ region }}
@@ -35,4 +35,4 @@
                     port=22 delay=60 timeout=320 state=started
       with_items: ec2.instances
 
-- include: jenkins.yaml
+#- include: jenkins.yaml
